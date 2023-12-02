@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+source "$(dirname "$0")"/_init.sh
+
+./gradlew :app:installDist
+
+app/build/install/app/bin/app "$@"

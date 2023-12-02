@@ -6,9 +6,12 @@
 
 plugins {
     id("usafacts.galactic.spending.kotlin-application-conventions")
+    id("org.jetbrains.kotlin.plugin.spring") version "1.9.20"
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web:3.2.0")
+    implementation("com.github.ajalt.clikt:clikt:4.2.1")
 }
 
 application {
