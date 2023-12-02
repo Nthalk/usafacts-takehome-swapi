@@ -5,5 +5,8 @@
  */
 
 plugins {
-    id("usafacts.galactic.spending.kotlin-library-conventions")
+    id("usafacts.galactic.spending.kotlin-application-conventions")
+}
+
+dependencies {
 }

@@ -12,4 +12,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "usafacts-galactic-spending-build-logic"
+rootProject.name = "build-logic"
