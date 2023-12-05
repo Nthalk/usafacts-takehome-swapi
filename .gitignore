@@ -2,7 +2,11 @@
 .gradle
 
 # Ignore Gradle build output directory
-build
+ui/build
+app/build
+dev/build
+/build
+build-logic/build
 
 node_modules
 

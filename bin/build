@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+source "$(dirname "$0")"/_init.sh
+
+# if cleanroom arg is passed
+if [ $# -eq 1 ] && [ "$1" == "cleanroom" ]; then
+  cat <<EOF | docker run -v .:/src --expose 8080 -i ubuntu:22.04 bash
+    apt update
+    apt install openjdk-21-jre-headless -y
+    cd /src
+    ./bin/build
+EOF
+  exit
+fi
+
+# Compile everything
+./gradlew assemble
+
+# Start with a fresh db
+db reset
+
+# Import data
+app import-data
+app create-datasets
+
+# Regenerate models and apis
+dev gen-db
+./gradlew app:build
+dev gen-api
+
+app run

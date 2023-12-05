@@ -9,11 +9,12 @@ import usafacts.galactic.spending.app.WebApp
 class RunCommand : CliktCommand() {
     val importData by option("--import-data", help = "Import data before running").flag()
     val createDatasets by option("--create-datasets", help = "Create datasets before running").flag()
+    val init by option("--init", help = "Run both import and create datasets").flag()
     override fun run() {
-        if (importData) {
+        if (importData || init) {
             ImportDataCommand.enable()
         }
-        if (createDatasets) {
+        if (createDatasets || init) {
             CreateDatasetsCommand.enable()
         }
         SpringApplication.run(WebApp::class.java)

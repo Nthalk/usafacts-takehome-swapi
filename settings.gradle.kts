@@ -17,4 +17,4 @@ plugins {
 }
 
 rootProject.name = "usafacts-galactic-spending"
-include("dev", "app", "ui")
+include("dev", "ui", "app")
