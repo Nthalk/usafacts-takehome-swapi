@@ -61,5 +61,9 @@ For a simple app rebuild (the app will be under `app/build/install`)
 # Building in a cleanroom with Docker
 
 ```bash
-./bin/build cleanroom
+docker run -v .:/src -p 8080:8080 -it ubuntu:22.04 bash
+apt update
+apt install openjdk-21-jre-headless -y
+cd /src
+./bin/build
 ```
