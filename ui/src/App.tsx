@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import useApi from "./ApiClient";
+import {ReportsApiStarshipReport} from "./api-gen";
+import {Container} from "@mui/material";
+import StarshipReport from "./reports/StarshipReport";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    const api = useApi()
+    const [starships, setStarships] = useState<ReportsApiStarshipReport | null>(null)
+    useEffect(() => {
+        const req = api.reports.starships()
+        req.then((res) => {
+            setStarships(res)
+        })
+    },[api])
+    return (
+        <Container>
+            {starships !== null && <StarshipReport report={starships}/>}
+        </Container>
+    );
 }
-
-export default App;

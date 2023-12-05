@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+source "$(dirname "$0")"/_init.sh
+
+# db backup
+# db restore
+
+TARGET="${1-emptystring}"
+
+case $TARGET in
+backup)
+  if [[ ! -f db.sqlite ]]; then
+    echo "Db does not exist"
+    exit 1
+  fi
+  rm db.sqlite.bak 2>/dev/null || true
+  cp db.sqlite db.sqlite.bak
+  ;;
+restore)
+  if [[ ! -f db.sqlite.bak ]]; then
+    echo "No backup found"
+    exit 1
+  fi
+  rm db.sqlite 2>/dev/null || true
+  cp db.sqlite.bak db.sqlite
+  ;;
+reset)
+  rm db.sqlite 2>/dev/null || true
+  ;;
+*)
+  echo "Unknown target: $TARGET"
+  echo "Usage: $0 [backup|restore|reset]"
+  exit 1
+  ;;
+esac

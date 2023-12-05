@@ -3,8 +3,25 @@
  */
 package usafacts.galactic.spending.app
 
-import usafacts.galactic.spending.app.commands.MainCommand
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.subcommands
+import usafacts.galactic.spending.app.commands.CreateDatasetsCommand
+import usafacts.galactic.spending.app.commands.ImportDataCommand
+import usafacts.galactic.spending.app.commands.RunCommand
+
+class AppMainCommand : CliktCommand() {
+    init {
+        subcommands(
+            RunCommand(),
+            ImportDataCommand(),
+            CreateDatasetsCommand()
+        )
+    }
+
+    override fun run() {
+    }
+}
 
 fun main(vararg args: String) {
-    MainCommand().main(args)
+    AppMainCommand().main(args)
 }

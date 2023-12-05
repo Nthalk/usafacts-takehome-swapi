@@ -11,6 +11,12 @@ dependencies {
     implementation("org.jsonschema2pojo:jsonschema2pojo-core:1.2.1")
     // Code generation for clients
     implementation("com.squareup:kotlinpoet:1.15.2")
+    implementation("cz.habarta.typescript-generator:typescript-generator-spring:3.2.1263")
+    implementation("cz.habarta.typescript-generator:typescript-generator-core:3.2.1263")
+
+
+    implementation("org.xerial:sqlite-jdbc:3.44.1.0")
+    implementation("org.jooq:jooq-codegen:3.18.7")
     // Jackson JSON Object Mapper
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0")

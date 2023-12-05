@@ -7,14 +7,58 @@
 plugins {
     id("usafacts.galactic.spending.kotlin-application-conventions")
     id("org.jetbrains.kotlin.plugin.spring") version "1.9.20"
+    id("idea")
 }
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:3.2.0")
+    implementation("org.springframework.boot:spring-boot-starter-cache:3.2.0")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc:3.2.0")
+    implementation("org.xerial:sqlite-jdbc:3.44.1.0")
+    implementation("org.jooq:jooq:3.18.7")
+    implementation("org.flywaydb:flyway-core:10.1.0")
     implementation("com.github.ajalt.clikt:clikt:4.2.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:2.13.0")
+    implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+
 }
+
+sourceSets {
+    main {
+        java {
+            srcDirs("src/main/kotlin", "src/main/gen")
+        }
+        resources {
+            srcDirs(
+                "src/main/resources",
+            )
+
+        }
+    }
+}
+
+idea {
+    module {
+        generatedSourceDirs.add(file("src/main/gen"))
+    }
+}
+
+val copyWebApp = task("copyWebApp") {
+    doLast {
+        copy {
+            from("../ui/build")
+            into("build/resources/main/public")
+        }
+    }
+}
+tasks.assemble {
+    dependsOn(copyWebApp)
+}
+
 
 application {
     // Define the main class for the application.
-    mainClass.set("usafacts.galactic.spending.app.AppKt")
+    mainClass.set("usafacts.galactic.spending.app.AppMainKt")
 }
